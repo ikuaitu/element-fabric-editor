@@ -138,7 +138,8 @@ const getTempData = async () => {
   routerToId(props.itemId)
   editorStore.editor.loadJSON(
     JSON.stringify(data.data.attributes.json),
-    loadingInstance.close
+    // 传回调引用,加载完成后才关闭 loading
+    () => loadingInstance.close()
   )
 }
 

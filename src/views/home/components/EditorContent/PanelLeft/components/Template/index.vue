@@ -127,7 +127,8 @@ const getTempData = async (info) => {
   }
   editorStore.editor.loadJSON(
     JSON.stringify(infoRes.data.data.attributes.json),
-    loadingInstance?.close()
+    // 传回调引用,加载完成后才关闭 loading
+    () => loadingInstance?.close()
   )
 }
 
@@ -142,7 +143,8 @@ const getTemplInfo = async () => {
       const infoRes = await getInfo(route.query.tempId)
       editorStore.editor.loadJSON(
         JSON.stringify(infoRes.data.data.attributes.json),
-        loadingInstance?.close()
+        // 传回调引用,加载完成后才关闭 loading
+        () => loadingInstance?.close()
       )
     } catch (error) {
       // 错误已忽略，不影响主流程

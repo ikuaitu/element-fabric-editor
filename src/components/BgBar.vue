@@ -39,8 +39,10 @@ import { useEditorStore } from '@/store/modules/editor'
 import { Utils } from '@/lib/core'
 import { debounce } from 'lodash-es'
 import { ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 import useSelect from '@/hooks/select'
 
+const { t } = useI18n()
 const { isSelect } = useSelect()
 const editorStore = useEditorStore()
 const { getImgStr, selectFiles } = Utils
@@ -122,11 +124,11 @@ const handleSetBgImg = debounce(function () {
 }, 250)
 
 const handleRmoveBgImg = debounce(function () {
-  ElMessageBox.confirm('您确定移除画布吗?', 'Warning', {
-    title: '提示',
+  ElMessageBox.confirm(t('editor.bgSetting.removeBgConfirm'), 'Warning', {
+    title: t('common.tip'),
     type: 'warning',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消'
+    confirmButtonText: t('common.okText'),
+    cancelButtonText: t('common.cancelText')
   }).then(() => {
     editorStore.canvas?.setBackgroundImage(
       // @ts-ignore
